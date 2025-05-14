@@ -7,8 +7,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./tickets/tickets.module').then((m) => m.TicketsModule),
   },
-  { path: '', redirectTo: '/tickets', pathMatch: 'full' },
-  { path: '**', redirectTo: '/tickets' },
+  { path: '', redirectTo: '/tickets/list', pathMatch: 'full' },
+  { path: '**', redirectTo: '/tickets/list' },
 ];
 
 
