@@ -1,0 +1,53 @@
+<mat-card class="ticket-detail-container" *ngIf="ticketData">
+  <mat-card-header>
+    <mat-card-title>🎫 Ticket #{{ ticketData.ticketNo }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ ticketData.projectName }} - {{ ticketData.moduleName }}</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="info-grid">
+      <div><strong>Sub Module:</strong> {{ ticketData.subModuleName }}</div>
+      <div><strong>Frequency:</strong> {{ ticketData.frequency }}</div>
+      <div><strong>Priority:</strong> {{ ticketData.priority }}</div>
+      <div class="status-badge">
+        <strong>Status:</strong> <span class="badge">{{ ticketData.status }}</span>
+      </div>
+        <p><strong>Created At:</strong> {{ ticketData.createdAt | date: 'short' }}</p>
+        <p><strong>Updated At:</strong> {{ ticketData.updatedAt | date: 'short' }}</p>
+    </div>
+
+    <div class="issue-section">
+      <strong>Issue Description:</strong>
+      <p>{{ ticketData.issueDescription }}</p>
+    </div>
+
+    <!-- Editable Form -->
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="edit-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Assign To</mat-label>
+        <mat-select formControlName="assignedUser">
+          <mat-option *ngFor="let user of assignedUsers" [value]="user">{{ user }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let s of statusOptions" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+  mat-raised-button
+  color="primary"
+  type="submit"
+  [disabled]="ticketForm.invalid"
+  *ngIf="!isViewMode" 
+>
+  Update Ticket
+</button>
+    </form>
+  </mat-card-content>
+</mat-card>

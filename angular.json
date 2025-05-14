@@ -118,7 +118,6 @@
       }
     }
   },
-  "defaultProject": "complaint-tracker",
   "cli": {
     "schematicCollections": [
       "angular-eslint"

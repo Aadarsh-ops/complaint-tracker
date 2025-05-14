@@ -1,0 +1,57 @@
+<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <mat-card>
+    <mat-card-title>Create Ticket</mat-card-title>
+    <mat-card-content>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Project Name</mat-label>
+        <input matInput formControlName="projectName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Module Name</mat-label>
+        <input matInput formControlName="moduleName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Sub-Module Name</mat-label>
+        <input matInput formControlName="subModuleName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Frequency</mat-label>
+        <mat-select formControlName="frequency">
+          <mat-option value="Daily">Daily</mat-option>
+          <mat-option value="Weekly">Weekly</mat-option>
+          <mat-option value="Monthly">Monthly</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="Low">Low</mat-option>
+          <mat-option value="Medium">Medium</mat-option>
+          <mat-option value="High">High</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Issue Description</mat-label>
+        <textarea matInput rows="5" formControlName="issueDescription" required></textarea>
+      </mat-form-field>
+
+      <div class="file-upload-wrapper">
+        <label class="upload-label">Upload Document:</label>
+        <input type="file" class="upload-input" id="fileUpload" (change)="onFileChange($event)" required />
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="ticketForm.invalid">
+        Submit Ticket
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
