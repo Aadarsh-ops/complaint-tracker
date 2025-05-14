@@ -49,7 +49,8 @@ export class TicketFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    console.log(this.ticketForm.value);
+    console.log(this.selectedFile);
     if (this.ticketForm.invalid) return;
     /**
    * We are using FormData here because we need to send both:
