@@ -22,6 +22,7 @@ export class TicketFormComponent implements OnInit {
     private fb: FormBuilder,
     private ticketService: TicketService,
     private snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
 
@@ -48,9 +49,20 @@ export class TicketFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.ticketForm.value);
-    console.log(this.selectedFile);
+
     if (this.ticketForm.invalid) return;
+    /**
+   * We are using FormData here because we need to send both:
+   * 1. Textual data (e.g., projectName, moduleName, issueDescription)
+   * 2. Binary data (e.g., selected file like image, PDF, etc.)
+   *
+   * JSON cannot handle file uploads directly, and if we use a regular
+   * object, the content-type would be 'application/json', which doesn't
+   * support file uploads.
+   *
+   * FormData sets the content-type to 'multipart/form-data', which is
+   * required for uploading files along with other form fields.
+   */
 
     const formData = new FormData();
     formData.append('projectName', this.ticketForm.value.projectName);
@@ -66,6 +78,7 @@ export class TicketFormComponent implements OnInit {
       next: (res) => {
         this.snackBar.open(`Ticket Registered: ${res.ticketNo}`, 'Close', { duration: 3000 });
         this.ticketForm.reset();
+        this.router.navigate(['/tickets/list']);
       },
       error: (err) => {
         this.snackBar.open('Failed to register ticket.', 'Close', { duration: 3000 });
