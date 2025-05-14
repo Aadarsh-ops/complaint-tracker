@@ -7,7 +7,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { UnsavedChangesGuard } from '../core/guards/unsaved-changes.guard';
 
 const routes: Routes = [
-  { path: '', component: TicketsComponent },
+  { path: '', component:  TicketListComponent},
   { path: 'list', component: TicketListComponent },
   { path: 'add', component: TicketFormComponent },
   { path: 'ticket/view/:ticketNo', component: TicketDetailsComponent },
